@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Fonts ──────────────────────────────────────────────────── */
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/CabinetGrotesk.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Design Tokens ──────────────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 0.625rem;
+
+    /* Warm light background */
+    --background: 0.985 0.005 90;
+    --foreground: 0.2 0.02 85;
+
+    --card: 1 0 0;
+    --card-foreground: 0.2 0.02 85;
+
+    --popover: 0.99 0.005 85;
+    --popover-foreground: 0.2 0.02 85;
+
+    /* Sage green primary */
+    --primary: 0.52 0.1 155;
+    --primary-foreground: 0.99 0.005 90;
+
+    --secondary: 0.94 0.015 100;
+    --secondary-foreground: 0.35 0.02 85;
+
+    --muted: 0.945 0.01 95;
+    --muted-foreground: 0.5 0.03 90;
+
+    /* Warm amber accent */
+    --accent: 0.72 0.12 75;
+    --accent-foreground: 0.15 0.01 85;
+
+    --destructive: 0.58 0.2 25;
+    --destructive-foreground: 0.99 0.005 0;
+
+    --border: 0.9 0.01 90;
+    --input: 0.935 0.01 90;
+    --ring: 0.52 0.1 155;
+
+    --chart-1: 0.52 0.1 155;
+    --chart-2: 0.64 0.12 170;
+    --chart-3: 0.72 0.12 75;
+    --chart-4: 0.6 0.1 230;
+    --chart-5: 0.65 0.14 40;
+
+    --sidebar: 0.97 0.008 95;
+    --sidebar-foreground: 0.2 0.02 85;
+    --sidebar-primary: 0.52 0.1 155;
+    --sidebar-primary-foreground: 0.99 0.005 90;
+    --sidebar-accent: 0.93 0.015 100;
+    --sidebar-accent-foreground: 0.35 0.02 85;
+    --sidebar-border: 0.9 0.01 90;
+    --sidebar-ring: 0.52 0.1 155;
+
+    /* Day completion */
+    --success: 0.58 0.14 155;
+    --success-foreground: 0.99 0.005 90;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ─── Custom Utilities ───────────────────────────────────────── */
+@layer utilities {
+  .font-display {
+    font-family: "Cabinet Grotesk", sans-serif;
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.42 0.12 155) 0%,
+      oklch(0.58 0.14 155) 50%,
+      oklch(0.52 0.1 170) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shadow-task {
+    box-shadow:
+      0 1px 3px oklch(0.2 0.02 85 / 0.07),
+      0 4px 16px oklch(0.2 0.02 85 / 0.05);
+  }
+
+  .shadow-task-hover {
+    box-shadow:
+      0 2px 8px oklch(0.2 0.02 85 / 0.1),
+      0 8px 24px oklch(0.2 0.02 85 / 0.08);
+  }
+
+  .shadow-float {
+    box-shadow:
+      0 8px 32px oklch(0.52 0.1 155 / 0.3),
+      0 2px 8px oklch(0.2 0.02 85 / 0.15);
+  }
+
+  .dot-grid {
+    background-image: radial-gradient(
+      circle,
+      oklch(0.75 0.02 90) 1px,
+      transparent 1px
+    );
+    background-size: 20px 20px;
+  }
+
+  .task-done {
+    @apply opacity-60;
+    text-decoration: line-through;
+    text-decoration-color: oklch(0.52 0.1 155 / 0.5);
+  }
+
+  .day-pill {
+    @apply inline-flex items-center justify-center rounded-full text-xs font-semibold transition-all duration-150 cursor-pointer select-none;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .day-pill-active {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .day-pill-inactive {
+    @apply bg-muted text-muted-foreground hover:bg-secondary;
+  }
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(0.95 0.008 95);
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.78 0.04 130);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.62 0.08 150);
+}
+
+/* ─── Keyframes ──────────────────────────────────────────────── */
+@keyframes check-pop {
+  0% { transform: scale(0.8); }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+.animate-check-pop {
+  animation: check-pop 0.25s ease-out forwards;
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.35s ease-out forwards;
+}
